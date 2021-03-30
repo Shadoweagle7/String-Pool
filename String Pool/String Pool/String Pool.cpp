@@ -2,10 +2,23 @@
 //
 
 #include <iostream>
+#include <string>
+#include <set>
+#include <utility>
+#include <concepts>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+class string_pool {
+private:
+    static std::set<std::string> pool;
+public:
+    template<class... argv>
+    const char *make(argv&&... args) requires std::constructible_from<std::string, argv...> {
+        this->pool.emplace(std::forward(args)...).first->c_str();
+    }
+};
+
+int main(int argc, const char *argv[]) {
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
