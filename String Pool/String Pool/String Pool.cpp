@@ -70,8 +70,12 @@ public:
 
 std::set<std::string> string_pool::pool;
 
+const char *operator"" _sp(const char *str, size_t n) {
+    return string_pool::make(str);
+}
+
 int main(int argc, const char *argv[]) {
-    const char *test = string_pool::make("boing");
+    const char *test = "boing"_sp;
 
     std::cout << "string_pool::size(): " << string_pool::size() << "\n";
 
